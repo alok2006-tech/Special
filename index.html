@@ -20,7 +20,7 @@
 <button id="mute" aria-label="Mute or unmute music">🔊</button>
 
 <main id="site" hidden>
-  <section id="intro">
+  <section id="intro" class="page">
     <h1 class="title"><span class="grad">Happy Birthday, Khushi!</span> 🎂✨</h1>
     <h2 class="sub">7 October — Your Day <span id="heart">💗</span></h2>
     <p id="introText" class="glass pad"></p>
@@ -28,19 +28,19 @@
     <span class="star" style="top:12%;left:10%">✦</span><span class="star" style="top:30%;right:12%">✧</span><span class="star" style="bottom:15%;left:20%">✦</span>
   </section>
 
-  <section id="gallery">
+  <section id="gallery" class="page">
     <h2>Little pieces of you 📸</h2>
     <div id="grid"></div>
     <button class="btn go" data-next="letter">Continue ✨</button>
   </section>
 
-  <section id="letter">
+  <section id="letter" class="page">
     <h2>A little something I wanted to tell you... 💌</h2>
     <p id="typed" class="glass pad"></p>
     <button id="toCandles" class="btn go w" style="--d:0s" data-next="candles" hidden>Continue ✨</button>
   </section>
 
-  <section id="candles">
+  <section id="candles" class="page">
     <h2 id="prompt">Okay Khushi... your next surprise is in these three candles 👀</h2>
     <p id="status">Choose one candle.</p>
     <div id="cake">
@@ -56,7 +56,7 @@
     </div>
   </section>
 
-  <section id="last" hidden>
+  <section id="last" class="page">
     <p class="big" id="l1"></p>
     <p class="big" id="l2"></p>
     <figure class="pol big-pol"><img id="finalImg" alt=""></figure>
@@ -65,8 +65,6 @@
   </section>
 
   <footer id="foot">Made with jealousy for Khushi</footer>
-  <footer id="foot">Made with everything I never say out loud</footer>
-
 </main>
 
 <div id="final" class="screen" hidden>

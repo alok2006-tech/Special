@@ -10,7 +10,9 @@ h2{font-size:clamp(1.5rem,5vw,2.2rem);margin-bottom:24px}
 .go{margin-top:30px}
 .sub{font-size:clamp(1.1rem,4vw,1.5rem);margin:14px 0 26px}
 section{position:relative;max-width:980px;margin:auto;padding:80px 20px;text-align:center}
-#intro{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.page{display:none;min-height:100vh}
+.page.active{display:flex;flex-direction:column;align-items:center;justify-content:center;animation:pagein .7s ease}
+@keyframes pagein{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 .glass{background:rgba(255,255,255,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.85);border-radius:24px;box-shadow:0 10px 30px rgba(180,120,160,.2)}
 .pad{padding:26px 22px;max-width:640px;margin:0 auto;white-space:pre-line}
 .btn{font:600 1.05rem 'Quicksand',sans-serif;padding:16px 30px;border:0;border-radius:40px;color:#fff;cursor:pointer;min-height:52px;
@@ -24,8 +26,7 @@ section{position:relative;max-width:980px;margin:auto;padding:80px 20px;text-ali
 @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 #mute{position:fixed;top:14px;right:14px;z-index:70;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
 .reveal{opacity:0;translate:0 30px;transition:opacity 1s,translate 1s}.reveal.in{opacity:1;translate:0 0}
-/* floating things *//*check the positions of the floating things and 
-make sure that every possible floating things are at their correct places*/
+/* floating things */
 .fl{position:fixed;bottom:-40px;z-index:5;pointer-events:none;animation:rise linear forwards}
 @keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
 .star{position:absolute;font-size:1.6rem;color:#e6b800;cursor:pointer;animation:tw 2.5s infinite alternate}
@@ -42,7 +43,7 @@ make sure that every possible floating things are at their correct places*/
 #viewer{position:fixed;inset:0;z-index:80;background:rgba(40,20,50,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
 #viewer[hidden]{display:none}
 #viewer img{max-width:94%;max-height:80vh;border-radius:10px}#viewer p{color:#fff;font-family:'Caveat',cursive;font-size:1.5rem}
-/* candles *//*What to improve in this--->Increase the size of candles*/
+/* candles */
 #status{margin-bottom:28px;opacity:.85}
 #cake{position:relative;width:min(360px,92%);margin:30px auto 20px}
 #row{display:flex;justify-content:space-around;position:relative;z-index:2}

@@ -48,10 +48,20 @@ const BLOW_THRESHOLD = 0.15;
 const $ = s => document.querySelector(s);
 const audio = $("#music");
 
+/* ---- Pages: only one section is visible at a time ---- */
+const pages = ["intro", "gallery", "letter", "candles", "last"];
+function showPage(id) {
+  pages.forEach(p => document.getElementById(p).classList.toggle("active", p === id));
+  window.scrollTo({ top: 0 });
+  if (id === "gallery") revealGallery();
+  if (id === "letter" && !typed) { typed = true; typeText($("#typed"), friendshipMessage); }
+}
+
 /* ---- Welcome / open ---- */
 $("#open").onclick = () => {
   $("#welcome").classList.add("gone");
   $("#site").hidden = false;
+  showPage("intro");
   audio.src = musicSrc;
   audio.play().catch(() => {}); // starts only after her click
   startFloating(1100);
@@ -109,14 +119,13 @@ photos.forEach((p, i) => {
 $("#viewer").onclick = () => $("#viewer").hidden = true;
 $("#finalImg").src = finalPhoto;
 
-/* ---- Scroll reveals + typewriter ---- */
-let typed = false;
-const io = new IntersectionObserver(es => es.forEach(en => {
-  if (!en.isIntersecting) return;
-  en.target.classList.add("in");
-  if (en.target.id === "letter" && !typed) { typed = true; typeText($("#typed"), friendshipMessage); }
-}), { threshold: .3 });
-document.querySelectorAll(".reveal,#letter,#candles").forEach(el => { el.classList.add("reveal"); io.observe(el); });
+/* ---- Gallery reveal + typewriter (triggered when their page becomes active) ---- */
+let typed = false, galleryRevealed = false;
+function revealGallery() {
+  if (galleryRevealed) return;
+  galleryRevealed = true;
+  document.querySelectorAll("#grid .pol").forEach((el, i) => setTimeout(() => el.classList.add("in"), i * 90));
+}
 function typeText(el, text) {
   let i = 0, timer;
   const finish = () => { clearTimeout(timer); el.textContent = text; $("#toCandles").hidden = false; };
@@ -127,9 +136,8 @@ function typeText(el, text) {
   })();
 }
 
-/* ---- "Continue" buttons scroll to the next section ---- */
-document.querySelectorAll(".go").forEach(b => b.onclick = () =>
-  document.getElementById(b.dataset.next).scrollIntoView({ behavior: "smooth" }));
+/* ---- "Continue" buttons move to the next page ---- */
+document.querySelectorAll(".go").forEach(b => b.onclick = () => showPage(b.dataset.next));
 
 /* ---- Candles ---- */
 const keys = ["candle1", "candle2", "candle3"];
@@ -213,9 +221,8 @@ function finalSurprise() {
   $("#lastBtn").onclick = () => {
     clearInterval(rep);
     $("#final").hidden = true;
-    $("#last").hidden = false;
     $("#l1").textContent = lastLines[0]; $("#l2").textContent = lastLines[1]; $("#l3").textContent = lastLines[2];
-    $("#last").scrollIntoView({ behavior: "smooth" });
+    showPage("last");
     startFloating(350);
   };
 }
