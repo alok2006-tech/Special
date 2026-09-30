@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Khushi 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Quicksand:wght@400;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="music" loop></audio>
+
+<div id="welcome" class="screen">
+  <h1 class="w" style="--d:.3s">Hey Khushi... 👀</h1>
+  <p class="w" style="--d:2.3s">I made something for you...</p>
+  <p class="w" style="--d:4.3s">Because someone very special has her birthday on 7th October 🎂</p>
+  <button id="open" class="btn w" style="--d:6.3s">Open Your Surprise ✨</button>
+</div>
+
+<button id="mute" aria-label="Mute or unmute music">🔊</button>
+
+<main id="site" hidden>
+  <section id="intro">
+    <h1 class="title"><span class="grad">Happy Birthday, Khushi!</span> 🎂✨</h1>
+    <h2 class="sub">7 October — Your Day <span id="heart">💗</span></h2>
+    <p id="introText" class="glass pad"></p>
+    <button class="btn go w" style="--d:1.5s" data-next="gallery">Continue ✨</button>
+    <span class="star" style="top:12%;left:10%">✦</span><span class="star" style="top:30%;right:12%">✧</span><span class="star" style="bottom:15%;left:20%">✦</span>
+  </section>
+
+  <section id="gallery">
+    <h2>Little pieces of you 📸</h2>
+    <div id="grid"></div>
+    <button class="btn go" data-next="letter">Continue ✨</button>
+  </section>
+
+  <section id="letter">
+    <h2>A little something I wanted to tell you... 💌</h2>
+    <p id="typed" class="glass pad"></p>
+    <button id="toCandles" class="btn go w" style="--d:0s" data-next="candles" hidden>Continue ✨</button>
+  </section>
+
+  <section id="candles">
+    <h2 id="prompt">Okay Khushi... your next surprise is in these three candles 👀</h2>
+    <p id="status">Choose one candle.</p>
+    <div id="cake">
+      <div id="row"></div>
+      <div class="cake"></div>
+    </div>
+    <button id="blow" class="btn" hidden>Blow it out ✨</button>
+    <div id="card" class="glass pad" hidden>
+      <h3>You unlocked this one... 💌</h3>
+      <p id="cardMsg"></p>
+      <p id="more">Ready for another one? 👀</p>
+      <button id="another" class="btn">Choose Another Candle ✨</button>
+    </div>
+  </section>
+
+  <section id="last" hidden>
+    <p class="big" id="l1"></p>
+    <p class="big" id="l2"></p>
+    <figure class="pol big-pol"><img id="finalImg" alt=""></figure>
+    <h1 class="title"><span class="grad">Happy Birthday, Khushi</span> 🎂✨</h1>
+    <p class="sub" id="l3"></p>
+  </section>
+
+  <footer id="foot">Made with jealousy for Khushi</footer>
+  <footer id="foot">Made with everything I never say out loud</footer>
+
+</main>
+
+<div id="final" class="screen" hidden>
+  <h1 class="title"><span class="grad">You found all three messages!</span> 🥹❤️</h1>
+  <p id="finalText" class="glass pad"></p>
+  <button id="lastBtn" class="btn">One Last Thing... 👀</button>
+</div>
+
+<div id="viewer" hidden><img alt=""><p></p></div>
+<div id="toast" hidden></div>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+:root{--ink:#5a4560;--pink:#ffb6d0;--lav:#cdb4db;--peach:#ffd6a5;--acc:#e58bb0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Quicksand',system-ui,sans-serif;color:var(--ink);line-height:1.7;overflow-x:hidden;
+ background:linear-gradient(160deg,#fff0f5,#f3e8ff 50%,#ffefe0) fixed;min-height:100vh}
+h1,h2,h3,.title{font-family:'Playfair Display',Georgia,serif;font-style:italic}
+h2{font-size:clamp(1.5rem,5vw,2.2rem);margin-bottom:24px}
+.title{font-size:clamp(2rem,8vw,4rem);line-height:1.15}
+.grad{background:linear-gradient(90deg,#e58bb0,#a77bd1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.go{margin-top:30px}
+.sub{font-size:clamp(1.1rem,4vw,1.5rem);margin:14px 0 26px}
+section{position:relative;max-width:980px;margin:auto;padding:80px 20px;text-align:center}
+#intro{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.85);border-radius:24px;box-shadow:0 10px 30px rgba(180,120,160,.2)}
+.pad{padding:26px 22px;max-width:640px;margin:0 auto;white-space:pre-line}
+.btn{font:600 1.05rem 'Quicksand',sans-serif;padding:16px 30px;border:0;border-radius:40px;color:#fff;cursor:pointer;min-height:52px;
+ background:linear-gradient(135deg,#f78fb3,#b28dff);box-shadow:0 8px 20px rgba(200,110,170,.35);transition:transform .2s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.screen{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center;
+ background:linear-gradient(160deg,#ffe3ee,#eadcff 55%,#ffe8d2);transition:opacity 1s,visibility 1s}
+.screen.gone{opacity:0;visibility:hidden}
+#final{z-index:60;overflow-y:auto}
+.w{opacity:0;animation:fade 1.2s var(--d) forwards}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#mute{position:fixed;top:14px;right:14px;z-index:70;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.reveal{opacity:0;translate:0 30px;transition:opacity 1s,translate 1s}.reveal.in{opacity:1;translate:0 0}
+/* floating things *//*check the positions of the floating things and 
+make sure that every possible floating things are at their correct places*/
+.fl{position:fixed;bottom:-40px;z-index:5;pointer-events:none;animation:rise linear forwards}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.star{position:absolute;font-size:1.6rem;color:#e6b800;cursor:pointer;animation:tw 2.5s infinite alternate}
+@keyframes tw{to{opacity:.3;transform:scale(.7)}}
+#heart{cursor:pointer;display:inline-block;animation:beat 1.4s infinite}
+@keyframes beat{50%{transform:scale(1.25)}}
+/* gallery */
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:26px;padding:10px}
+.pol{background:#fff;padding:10px 10px 12px;box-shadow:0 8px 22px rgba(120,80,120,.22);transform:rotate(var(--r,0deg));transition:.35s;cursor:pointer}
+.pol:hover{transform:rotate(0) scale(1.06);z-index:2}
+.pol img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:linear-gradient(135deg,var(--pink),var(--lav),var(--peach))}
+.pol figcaption{font-family:'Caveat',cursive;font-size:1.3rem;margin-top:8px}
+.big-pol{max-width:320px;margin:26px auto;--r:-2deg}
+#viewer{position:fixed;inset:0;z-index:80;background:rgba(40,20,50,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
+#viewer[hidden]{display:none}
+#viewer img{max-width:94%;max-height:80vh;border-radius:10px}#viewer p{color:#fff;font-family:'Caveat',cursive;font-size:1.5rem}
+/* candles *//*What to improve in this--->Increase the size of candles*/
+#status{margin-bottom:28px;opacity:.85}
+#cake{position:relative;width:min(360px,92%);margin:30px auto 20px}
+#row{display:flex;justify-content:space-around;position:relative;z-index:2}
+.cake{height:90px;border-radius:18px 18px 26px 26px;margin-top:-8px;background:linear-gradient(#fff,#ffd1e3 45%,#f7a8c8);box-shadow:0 12px 24px rgba(200,110,150,.3)}
+.candle{background:none;border:0;cursor:pointer;width:80px;padding:6px 0;color:var(--ink);font:600 .8rem 'Quicksand',sans-serif;position:relative;transition:.3s}
+.candle:hover{transform:translateY(-4px)}
+.stick{width:14px;height:64px;margin:0 auto;border-radius:4px;background:repeating-linear-gradient(45deg,#fff,#fff 6px,#ffb6d0 6px,#ffb6d0 12px)}
+.flame{width:18px;height:30px;margin:0 auto -2px;transform-origin:50% 100%;opacity:0;transition:opacity .4s}
+.flame i{display:block;width:100%;height:100%;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:radial-gradient(circle at 50% 70%,#fff6b0,#ffb84d 60%,#ff7a45);box-shadow:0 0 18px 6px rgba(255,190,90,.6);animation:flick .35s infinite alternate}
+@keyframes flick{from{transform:skewX(-4deg) scaleY(.95)}to{transform:skewX(4deg) scaleY(1.06)}}
+.candle.lit .flame{opacity:1}.candle.out .flame{opacity:0}
+.candle.done{opacity:.6;cursor:default}.candle.done span::after{content:" ✓"}
+.smoke{position:absolute;top:0;left:50%;width:10px;height:10px;border-radius:50%;background:rgba(160,160,170,.6);filter:blur(4px);animation:smoke 2s forwards}
+@keyframes smoke{to{transform:translate(12px,-70px) scale(4);opacity:0}}
+#blow{margin-top:12px}#card{margin-top:26px;animation:fade .9s}
+#card h3{margin-bottom:10px}#more{margin:16px 0 12px;font-weight:600}
+.big{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.3rem,5vw,2rem);margin:10px 0}
+#foot{padding:30px;font-size:.9rem;opacity:.75;cursor:pointer;text-align:center}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:90;padding:14px 22px;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:90%;text-align:center}
+[hidden]{display:none!important}
+@media(max-width:480px){section{padding:56px 16px}.candle{width:70px}}
