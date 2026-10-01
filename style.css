@@ -40,6 +40,7 @@ section{position:relative;max-width:980px;margin:auto;padding:80px 20px;text-ali
 .pol img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:linear-gradient(135deg,var(--pink),var(--lav),var(--peach))}
 .pol figcaption{font-family:'Caveat',cursive;font-size:1.3rem;margin-top:8px}
 .big-pol{max-width:320px;margin:26px auto;--r:-2deg}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:20px;max-width:520px;margin:10px auto 26px}
 #viewer{position:fixed;inset:0;z-index:80;background:rgba(40,20,50,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}
 #viewer[hidden]{display:none}
 #viewer img{max-width:94%;max-height:80vh;border-radius:10px}#viewer p{color:#fff;font-family:'Caveat',cursive;font-size:1.5rem}
@@ -62,6 +63,29 @@ section{position:relative;max-width:980px;margin:auto;padding:80px 20px;text-ali
 #card h3{margin-bottom:10px}#more{margin:16px 0 12px;font-weight:600}
 .big{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.3rem,5vw,2rem);margin:10px 0}
 #foot{padding:30px;font-size:.9rem;opacity:.75;cursor:pointer;text-align:center}
+
+/* cake cutting */
+#cakeStatus{margin-bottom:10px;opacity:.85}
+#cakeScene{position:relative;width:min(300px,85%);height:230px;margin:36px auto 10px}
+#knife{position:absolute;top:0;right:4px;background:none;border:0;font-size:2.6rem;line-height:1;cursor:pointer;
+ padding:10px;transform:rotate(-30deg);transition:transform .5s,opacity .4s;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+#knife.picked{transform:translate(-92px,112px) rotate(8deg) scale(1.08)}
+#knife.used{opacity:0;transform:translate(-92px,150px) rotate(30deg) scale(.8)}
+#bigCake{position:absolute;bottom:0;left:50%;translate:-50% 0;width:230px;cursor:pointer;transition:transform .15s}
+#bigCake.ready{animation:pulse 1.3s infinite}
+#bigCake.shake{animation:shake .4s}
+@keyframes pulse{50%{transform:scale(1.035)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.cakeTop{height:30px;border-radius:14px 14px 4px 4px;background:linear-gradient(#fff,#ffd9ec);box-shadow:0 4px 10px rgba(200,110,150,.25);position:relative;z-index:1}
+.cakeBody{height:150px;margin-top:-6px;border-radius:8px 8px 22px 22px;position:relative;overflow:hidden;
+ background:repeating-linear-gradient(90deg,#ffeaf4 0 20px,#ffd3e6 20px 40px);box-shadow:0 14px 28px rgba(200,110,150,.35)}
+#bigCake.cut .cakeTop,#bigCake.cut .cakeBody{animation:settle .5s ease}
+@keyframes settle{0%{transform:translateY(0)}40%{transform:translateY(4px)}100%{transform:translateY(0)}}
+.slice{position:absolute;z-index:2;left:50%;bottom:4px;width:60px;height:95px;opacity:0;pointer-events:none;
+ background:repeating-linear-gradient(90deg,#ffeaf4 0 20px,#ffd3e6 20px 40px);
+ clip-path:polygon(0 0,100% 42%,0 100%);box-shadow:0 10px 18px rgba(200,110,150,.3)}
+#bigCake.cut .slice{animation:sliceOut 1s ease forwards}
+@keyframes sliceOut{0%{opacity:0;translate:-50% 0;rotate:0deg}30%{opacity:1}100%{opacity:1;translate:70px 20px;rotate:35deg}}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:90;padding:14px 22px;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:90%;text-align:center}
 [hidden]{display:none!important}
 @media(max-width:480px){section{padding:56px 16px}.candle{width:70px}}

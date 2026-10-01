@@ -15,6 +15,10 @@ const photos = [
   { src: "images/khushi2.jpg", caption: "One of my favorite memories." },
   { src: "images/khushi3.jpg", caption: "Certified chaos." },
   { src: "images/khushi4.jpg", caption: "How are you this photogenic? 😭" },
+  { src: "images/khushi5.jpg", caption: "YOUR CAPTION" },
+  { src: "images/khushi6.jpg", caption: "YOUR CAPTION" },
+  { src: "images/khushi7.jpg", caption: "YOUR CAPTION" },
+  { src: "images/khushi8.jpg", caption: "YOUR CAPTION" },
 ];
 
 // 4) FRIENDSHIP MESSAGE (typed out as she scrolls)
@@ -30,8 +34,9 @@ const candleMessages = {
 // 6) FINAL MESSAGE (after all 3 candles)
 const finalMessage = `YOUR FINAL MESSAGE HERE`;
 
-// 7) LAST SECTION — favourite picture + lines
-const finalPhoto = "images/final.jpg";
+// 7) LAST SECTION — favourite pictures + lines
+const finalPhotos = [
+  { src: "images/final.jpg"}];
 const lastLines = [
   "And no matter how much I tease you...",
   "...I'm genuinely lucky to have you as my best friend. ❤️",
@@ -47,9 +52,10 @@ const BLOW_THRESHOLD = 0.15;
 /* ================= CODE (beginners can skip) ================= */
 const $ = s => document.querySelector(s);
 const audio = $("#music");
+audio.addEventListener("error", () => console.warn("Audio file problem — check music/song.mp3 exists, is named exactly that, and is a valid mp3."));
 
 /* ---- Pages: only one section is visible at a time ---- */
-const pages = ["intro", "gallery", "letter", "candles", "last"];
+const pages = ["intro", "gallery", "letter", "candles", "cakecut", "last"];
 function showPage(id) {
   pages.forEach(p => document.getElementById(p).classList.toggle("active", p === id));
   window.scrollTo({ top: 0 });
@@ -63,7 +69,7 @@ $("#open").onclick = () => {
   $("#site").hidden = false;
   showPage("intro");
   audio.src = musicSrc;
-  audio.play().catch(() => {}); // starts only after her click
+  audio.play().catch(err => console.warn("Music didn't play:", err, "— check music/song.mp3 exists and is a valid mp3.")); // starts only after her click
   startFloating(1100);
   setTimeout(() => burst(40), 700);
 };
@@ -117,7 +123,15 @@ photos.forEach((p, i) => {
   $("#grid").appendChild(f);
 });
 $("#viewer").onclick = () => $("#viewer").hidden = true;
-$("#finalImg").src = finalPhoto;
+$("#finalGrid").innerHTML = "";
+finalPhotos.forEach((p, i) => {
+  const f = document.createElement("figure");
+  f.className = "pol";
+  f.style.setProperty("--r", [-3, 2, -1.5, 3][i % 4] + "deg");
+  f.innerHTML = `<img src="${p.src}" alt="${p.caption}" loading="lazy">${p.caption ? `<figcaption>${p.caption}</figcaption>` : ""}`;
+  f.onclick = e => { $("#viewer img").src = p.src; $("#viewer p").textContent = p.caption; $("#viewer").hidden = false; burst(8, e.clientX, e.clientY, ["💗", "✨"]); };
+  $("#finalGrid").appendChild(f);
+});
 
 /* ---- Gallery reveal + typewriter (triggered when their page becomes active) ---- */
 let typed = false, galleryRevealed = false;
@@ -202,13 +216,40 @@ function extinguish(c) {
   $("#status").textContent = "";
   if (++done === 3) {
     $("#more").hidden = true; $("#another").hidden = true;
-    setTimeout(finalSurprise, 3500);
+    setTimeout(() => showPage("cakecut"), 3000);
   } else { $("#more").hidden = false; $("#another").hidden = false; }
 }
 $("#another").onclick = () => {
   $("#card").hidden = true;
   $("#prompt").textContent = "Choose another candle 👀";
   $("#status").textContent = `${3 - done} left...`;
+};
+
+/* ---- Cake cutting: pick up the knife, then tap the cake ---- */
+let knifePicked = false, cakeCut = false;
+$("#knife").onclick = () => {
+  if (knifePicked || cakeCut) return;
+  knifePicked = true;
+  $("#knife").classList.add("picked");
+  $("#bigCake").classList.add("ready");
+  $("#cakeStatus").textContent = "Now tap the cake to cut it! 🍰";
+};
+$("#bigCake").onclick = e => {
+  if (cakeCut) return;
+  if (!knifePicked) {
+    $("#bigCake").classList.add("shake");
+    $("#cakeStatus").textContent = "Pick up the knife first 👆";
+    setTimeout(() => $("#bigCake").classList.remove("shake"), 400);
+    return;
+  }
+  cakeCut = true;
+  $("#bigCake").classList.remove("ready");
+  $("#bigCake").classList.add("cut");
+  $("#knife").classList.add("used");
+  burst(28, e.clientX, e.clientY);
+  $("#cakePrompt").textContent = "Tradition complete 🍰✨";
+  $("#cakeStatus").textContent = "You cut the cake! 🎉";
+  setTimeout(finalSurprise, 2600);
 };
 
 /* ---- Final surprise ---- */
